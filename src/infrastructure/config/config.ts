@@ -17,10 +17,7 @@ import { env } from './env';
 const usuarioRepository = new UserInMemoryDatabase();
 const hashService = new HashService(env.SALT_ROUNDS);
 
-const jwtService = new JwtService(
-    env.ACCESS_SECRET, 
-    env.JWT_EXPIRATION
-);
+const jwtService = new JwtService(env.ACCESS_SECRET, env.JWT_EXPIRATION);
 
 const loginUserCase = new LoginUsuarioUseCase(usuarioRepository, hashService, jwtService);
 const registerUsuarioUseCase = new RegisterUsuarioUseCase(usuarioRepository, hashService);
@@ -34,10 +31,7 @@ const createMovimentoUseCase = new CreateMovimentoUseCase(movimentoRepository);
 
 const listMovimentoUseCase = new ListMovimentoUseCase(movimentoRepository);
 
-const consultarSaldoUseCase = new ConsultarSaldoUseCase(
-    calcularSaldoService,
-    movimentoRepository
-);
+const consultarSaldoUseCase = new ConsultarSaldoUseCase(calcularSaldoService, movimentoRepository);
 
 const deleteMovimentoUseCase = new DeleteMovimentoUseCase(movimentoRepository);
 
@@ -51,8 +45,4 @@ const movimentoController = new MovimentoController(
     updateMovimentoUseCase
 );
 
-export { 
-    usuarioController, 
-    movimentoController, 
-    jwtService 
-};
+export { usuarioController, movimentoController, jwtService };
