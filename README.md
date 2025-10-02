@@ -43,7 +43,7 @@ git https://github.com/FreddyBF/finance-backend.git
 cd finance-backend
 
 # Instale as dependências
-npm install
+yarn install
 
 # Configure o banco de dados
 # Crie um arquivo .env com as variáveis:
@@ -54,7 +54,7 @@ JWT_SECRET="sua_chave_secreta"
 npx prisma migrate dev
 
 # Inicie o servidor
-npm yarn dev
+yarn dev
 ```
 ---
 
@@ -64,11 +64,11 @@ npm yarn dev
 |--------|---------------------|-------------------------------------|
 | POST   | `/auth/register`    | Cadastro de usuário                 |
 | POST   | `/auth/login`       | Login e geração de token JWT        |
-| POST   | `/transactions`     | Criar movimentação                  |
-| PUT    | `/transactions/:id` | Atualizar movimentação              |
-| DELETE | `/transactions/:id` | Excluir movimentação                |
-| GET    | `/transactions`     | Listar movimentações com filtros    |
-| GET    | `/balance`          | Exibir saldo total                  |
+| POST   | `/movimentos`     | Criar movimentação                  |
+| PUT    | `/movimentos/:id` | Atualizar movimentação              |
+| DELETE | `/movimentos/:id` | Excluir movimentação                |
+| GET    | `/transactions?limit=valor&skip=valor`     | Listar movimentações com filtros    |
+| GET    | `movimentos/saldo`          | Exibir saldo total                  |
 
 ⚠️ Todas as rotas de movimentações exigem autenticação via **token JWT**.
 
