@@ -1,5 +1,5 @@
 {
-  "name": "node.js-challenge-master",
+  "name": "api-financas",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,md}\"",
     "build": "tsc",
     "cli": "ts-node src/infrastructure/cli/cli.ts",
-    "start": "node dist/main.js",
+    "start": "node dist/infrastructure/http/start.js",
     "dev": "ts-node-dev --respawn --transpile-only src/infrastructure/http/start.ts",
     "test": "jest --passWithNoTests"
   },
