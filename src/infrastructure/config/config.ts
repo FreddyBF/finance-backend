@@ -12,22 +12,37 @@ import { ConsultarSaldoUseCase } from '../../application/usecases/movimento/Cons
 import { UpdateMovimentoUseCase } from '../../application/usecases/movimento/UpdateMovimentoUseCase';
 import { DeleteMovimentoUseCase } from '../../application/usecases/movimento/DeleteMovimentoUseCase';
 import { CalcularSaldoService } from '../../domain/services/CalcularSaldoService';
+import { env } from './env';
 
 const usuarioRepository = new UserInMemoryDatabase();
 const hashService = new HashService();
-const jwtService = new JwtService('secret', '1h');
+
+const jwtService = new JwtService(
+    env.ACCESS_SECRET, 
+    env.JWT_EXPIRATION
+);
+
 const loginUserCase = new LoginUsuarioUseCase(usuarioRepository, hashService, jwtService);
 const registerUsuarioUseCase = new RegisterUsuarioUseCase(usuarioRepository, hashService);
 const usuarioController = new UsuarioController(loginUserCase, registerUsuarioUseCase);
 
 const movimentoRepository = new InMemoryDatabase();
+
 const calcularSaldoService = new CalcularSaldoService();
 
 const createMovimentoUseCase = new CreateMovimentoUseCase(movimentoRepository);
+
 const listMovimentoUseCase = new ListMovimentoUseCase(movimentoRepository);
-const consultarSaldoUseCase = new ConsultarSaldoUseCase(calcularSaldoService, movimentoRepository);
+
+const consultarSaldoUseCase = new ConsultarSaldoUseCase(
+    calcularSaldoService,
+    movimentoRepository
+);
+
 const deleteMovimentoUseCase = new DeleteMovimentoUseCase(movimentoRepository);
+
 const updateMovimentoUseCase = new UpdateMovimentoUseCase(movimentoRepository);
+
 const movimentoController = new MovimentoController(
     consultarSaldoUseCase,
     createMovimentoUseCase,
@@ -36,4 +51,8 @@ const movimentoController = new MovimentoController(
     updateMovimentoUseCase
 );
 
-export { usuarioController, movimentoController, jwtService };
+export { 
+    usuarioController, 
+    movimentoController, 
+    jwtService 
+};
