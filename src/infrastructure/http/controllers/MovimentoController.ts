@@ -9,7 +9,6 @@ import { CreateMovimentoDto } from '../../../application/dtos/movimento/CreateMo
 import { UpdateMovimentoDTO } from '../../../application/dtos/movimento/UpdateMovimentoDTO';
 import { ApiResponse } from '../helper/apiResponse';
 import { MovimentoOutputDTO } from '../../../application/dtos/movimento/MovimentoOutputDTO';
-import { ListMovimentoOutpuDTO } from '../../../application/dtos/movimento/ListMovimentoOutputDTO';
 import { SaldoDTO } from '../../../application/dtos/movimento/SaldoDTo';
 import { AuthenticatedRequest } from '../../../types/express';
 
@@ -70,11 +69,14 @@ export class MovimentoController {
         }
     };
 
-    criarMovimento = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    criarMovimento = async (
+        req: AuthenticatedRequest,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
         try {
             const { saldo, data, tipo } = req.body;
-            const userId = (req as any).userId;
-            console.log(`UserID no controller: ${userId}`);
+            const { userId } = req;
             const dto: CreateMovimentoDto = {
                 userId: Number(userId),
                 date: new Date(data as string),
