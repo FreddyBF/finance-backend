@@ -15,7 +15,7 @@ import { CalcularSaldoService } from '../../domain/services/CalcularSaldoService
 import { env } from './env';
 
 const usuarioRepository = new UserInMemoryDatabase();
-const hashService = new HashService();
+const hashService = new HashService(env.SALT_ROUNDS);
 
 const jwtService = new JwtService(
     env.ACCESS_SECRET, 
