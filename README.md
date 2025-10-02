@@ -15,8 +15,6 @@ API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo
 - ✅ Exibição do saldo total
 
 ---
-
----
 ## 🛠️ Tecnologias utilizadas
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
@@ -27,10 +25,9 @@ API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 ---
 
-## 🚀 Como executar o projeto
+## 🚀 Como executar o projecto
 
 ### Pré-requisitos
-
 - Node.js (v18+)
 - PostgreSQL
 - npm ou yarn
