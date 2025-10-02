@@ -1,11 +1,10 @@
-# 💰 Kinvo Finance API
+# 💰 Finance API
 
 ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
 
 API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo. O objetivo é gerenciar movimentações financeiras (receitas e despesas), autenticar usuários e exibir o saldo, utilizando boas práticas de arquitetura limpa e código escalável.
 
 ---
-
 ## 📚 Funcionalidades
 
 - ✅ Cadastro e login de usuários
@@ -15,6 +14,7 @@ API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo
 - ✅ Exibição do saldo total
 
 ---
+
 ## 🛠️ Tecnologias utilizadas
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
@@ -42,7 +42,6 @@ cd finance-backend
 # Instale as dependências
 yarn install
 
-# Configure o banco de dados
 # Crie um arquivo .env com as variáveis:
 DATABASE_URL="postgresql://usuario:senha@localhost:5432/kinvo"
 JWT_SECRET="sua_chave_secreta"
