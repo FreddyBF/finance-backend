@@ -1,74 +1,86 @@
-> ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
+# 💰 Kinvo Finance API
 
+![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
 
-# Kinvo - Desafio Back-end
+API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo. O objetivo é gerenciar movimentações financeiras (receitas e despesas), autenticar usuários e exibir o saldo, utilizando boas práticas de arquitetura limpa e código escalável.
 
-## Instruções
+---
 
-- Utilize Typescript com Node;
-- Desenvolva uma API REST ou GraphQL;
-- Fique à vontade para escolher as libs, arquitetura, frameworks, banco de dados e etc.;
-- Crie um arquivo README com instruções para executar seu projeto;
-- Crie a collection do Insomnia ou Postman, salve com o nome "collection".
+## 📚 Funcionalidades
 
-## Contexto
+- ✅ Cadastro e login de usuários
+- ✅ Criação de movimentações (receitas e despesas)
+- ✅ Atualização e exclusão de movimentações
+- ✅ Listagem com filtros por data e paginação
+- ✅ Exibição do saldo total
 
-Um estudante a fim de poupar gastos e controlar suas finanças pessoais resolveu desenvolver um aplicativo para lhe ajudar nessa missão. Após um estudo de caso ele mapeou as seguintes funcionalidades:
+---
 
-- Criação da movimentação (receitas e despesas);
-- Atualização da movimentação;
-- Exclusão da movimentação;
-- Listagem de movimentações;
-- Exibição do saldo.
+---
+## 🛠️ Tecnologias utilizadas
 
-## Requisitos
-|
-### Desenvolvedor Júnior
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+---
 
-- Filtro na listagem de movimentações por data (data inicial e data final);
-- Paginação na listagem de movimentações.
+## 🚀 Como executar o projeto
 
-### Desenvolvedor Pleno
+### Pré-requisitos
 
-- Todos os requisitos do Júnior;
-- API Rest semântica (se escolheu desenvolver uma API Rest);
-- Arquitetura minimamente escalável;
-- Cobertura mínima de testes automatizados.
+- Node.js (v18+)
+- PostgreSQL
+- npm ou yarn
 
-### Desenvolvedor Sênior
+### Instalação
 
-- Todos os requisitos do Pleno;
-- Autenticação:
-  - Cadastro de usuário;
-  - Login;
-  - Necessidade do usuário estar autenticado para a realização das atividades citadas no contexto.
-- Dockerizar a aplicação;
-- Boas práticas de POO (Exemplos: SOLID, Design Patterns, etc.).
+```bash
+# Clone o repositório
+git https://github.com/FreddyBF/finance-backend.git
+cd finance-backend
 
-### Diferenciais
+# Instale as dependências
+npm install
 
-- Cache;
-- Segurança da aplicação;
-- Deploy.
+# Configure o banco de dados
+# Crie um arquivo .env com as variáveis:
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/kinvo"
+JWT_SECRET="sua_chave_secreta"
 
-## Dicas
+# Execute as migrations
+npx prisma migrate dev
 
-- Se optar por uma API REST, tenha cuidado ao definir as rotas e verbos HTTP: faça uso de boas práticas;
-- Crie uma aplicação flexível, ou seja, que seja fácil incluir novas funcionalidades;
-- Clean Code: o código deve ser fácil de entender;
-- Atente-se a boas práticas de versionamento.
+# Inicie o servidor
+npm yarn dev
+```
+---
 
-## Processo de submissão
+## 📮 Rotas principais
 
-1. Faça o fork deste repositório;
-2. Faça seu projeto neste fork;
-3. Suba as alterações para o seu fork;
-4. Submeta uma PR para este repositório.
+| Método | Rota                | Descrição                           |
+|--------|---------------------|-------------------------------------|
+| POST   | `/auth/register`    | Cadastro de usuário                 |
+| POST   | `/auth/login`       | Login e geração de token JWT        |
+| POST   | `/transactions`     | Criar movimentação                  |
+| PUT    | `/transactions/:id` | Atualizar movimentação              |
+| DELETE | `/transactions/:id` | Excluir movimentação                |
+| GET    | `/transactions`     | Listar movimentações com filtros    |
+| GET    | `/balance`          | Exibir saldo total                  |
 
-## Observações:
+⚠️ Todas as rotas de movimentações exigem autenticação via **token JWT**.
 
-* O cumprimento dos requisitos solicitados para uma vaga em determinado nível não é garantia de aprovação. <strong>Focamos em avaliar a forma como os requisitos foram cumpridos.</strong>
-* Apesar da listagem de requisitos mínimos acima, caso não tenha tido tempo suficiente ou tenha se esbarrado em alguma dificuldade, entregue o desafio ainda que incompleto e conte-nos na descrição do pull request quais foram as suas maiores dificuldades. Não se preocupe, avaliaremos ainda assim! :)
-* Está com alguma dificuldade, encontrou algum problema no desafio ou tem alguma sugestão pra gente? Crie uma issue e descreva o que achar necessário ou entre em contato.
+---
 
-### Boa sorte! 🍀
+## 📌 Observações
+- O projeto ainda **não possui testes automatizados** nem **Docker**.  
+- A arquitetura foi pensada para **facilitar a escalabilidade e manutenção**.  
+- Futuras melhorias incluem **testes**, **cache**, **segurança avançada** e **deploy**.  
+
+---
+
+## 🧠 Sobre o desafio
+Este projeto foi desenvolvido como parte do **Desafio Back-end da Kinvo**.  
+O foco está em aplicar **boas práticas de desenvolvimento**, **arquitetura limpa** e **organização de código**.
