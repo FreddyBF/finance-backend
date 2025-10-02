@@ -1,0 +1,157 @@
+openapi: 3.0.0
+info:
+  title: API de Finanças Pessoais
+  version: 1.0.0
+  description: API para controle de receitas, despesas e saldo pessoal.
+
+servers:
+  - url: http://localhost:3000/api
+    description: Ambiente local de desenvolvimento
+
+tags:
+  - name: Autenticação
+    description: Cadastro e login de usuários
+  - name: Movimentações
+    description: Operações de receitas e despesas
+
+paths:
+  /auth/register:
+    post:
+      tags: [Autenticação]
+      summary: Cadastro de novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        '201':
+          description: Usuário cadastrado com sucesso
+        '409':
+          description: Email já cadastrado
+
+  /auth/login:
+    post:
+      tags: [Autenticação]
+      summary: Login do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        '200':
+          description: Login bem-sucedido
+        '401':
+          description: Credenciais inválidas
+
+  /movimentos:
+    get:
+      tags: [Movimentações]
+      summary: Listar movimentações com filtros e paginação
+      parameters:
+        - name: dataInicio
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: dataFim
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: skip
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de movimentações
+
+  /movimentos:
+    post:
+      tags: [Movimentações]
+      summary: Criar nova movimentação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                saldo:
+                  type: number
+                tipo:
+                  type: string
+                data:
+                  type: string
+                  format: date
+      responses:
+        '201':
+          description: Movimento criado com sucesso
+
+  /movimentos/{id}:
+    put:
+      tags: [Movimentações]
+      summary: Atualizar movimentação
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                saldo:
+                  type: number
+                tipo:
+                  type: string
+                data:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Movimento actualizado
+
+  /movimentos/{id}:
+    delete:
+      tags: [Movimentações]
+      summary: Apagar movimentação
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Movimento apagado
+
+  /movimentos/saldo:
+    get:
+      tags: [Movimentações]
+      summary: Consultar saldo do usuário
+      responses:
+        '200':
+          description: Saldo retornado com sucesso
