@@ -20,7 +20,10 @@ module.exports = [
         project: './tsconfig.json',
       },
     },
-    ignores: ['dist/', 'node_modules/'], // ✅ Correto no Flat Config
+    ignores: [
+      'dist/', 
+      'node_modules/'
+    ],
   },
 ];
 

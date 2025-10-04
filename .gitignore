@@ -4,3 +4,5 @@ src/infrastructure/cli
 .vscode
 .env
 test
+
+/src/generated/prisma

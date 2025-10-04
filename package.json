@@ -11,9 +11,13 @@
     "build": "tsc",
     "cli": "ts-node src/infrastructure/cli/cli.ts",
     "start": "node dist/infrastructure/http/start.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/infrastructure/http/start.ts",
-    "test": "jest --passWithNoTests"
+    "dev": "ts-node-dev --respawn --transpile-only src/interfaces/web/start.ts",
+    "test": "jest --passWithNoTests",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio"
   },
+  
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.36.0",

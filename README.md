@@ -43,7 +43,7 @@ cd finance-backend
 yarn install
 
 # Crie um arquivo .env com as variáveis:
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/kinvo"
+DATABASE_URL="postgresql://User:senha@localhost:5432/kinvo"
 JWT_SECRET="sua_chave_secreta"
 
 # Execute as migrations
@@ -60,11 +60,11 @@ yarn dev
 |--------|---------------------|-------------------------------------|
 | POST   | `/auth/register`    | Cadastro de usuário                 |
 | POST   | `/auth/login`       | Login e geração de token JWT        |
-| POST   | `/movimentos`     | Criar movimentação                  |
-| PUT    | `/movimentos/:id` | Atualizar movimentação              |
-| DELETE | `/movimentos/:id` | Excluir movimentação                |
+| POST   | `/transactions`     | Criar movimentação                  |
+| PUT    | `/transactions/:id` | Atualizar movimentação              |
+| DELETE | `/transactions/:id` | Excluir movimentação                |
 | GET    | `/transactions?limit=valor&skip=valor`     | Listar movimentações com filtros    |
-| GET    | `movimentos/saldo`          | Exibir saldo total                  |
+| GET    | `transactions/saldo`          | Exibir saldo total                  |
 
 ⚠️ Todas as rotas de movimentações exigem autenticação via **token JWT**.
 
