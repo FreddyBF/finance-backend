@@ -1,6 +1,6 @@
 node_modules
 dist
-src/infrastructure/cli
+src/interfaces/cli
 .vscode
 .env
 test
