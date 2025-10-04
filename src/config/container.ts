@@ -1,15 +1,20 @@
 // Infraestrutura
 import { env } from './env';
+import { prisma } from './prisma';
 import { InMemoryTransactionRepository } from '../infrastructure/repositories/inMemory/InMemoryTransactionRepository';
 import { InMemoryUserRepository } from '../infrastructure/repositories/inMemory/inMemoryUserRepository';
+import { PrismaUserRepository } from '../infrastructure/repositories/prisma/UserPrismaRepository';
+import { TransactionPrismaRepository } from '../infrastructure/repositories/prisma/TransactionPrismaRepository';
 import { JwtTokenAdapter } from '../infrastructure/adapters/auth/jwtService';
 import { HashingAdapter } from '../infrastructure/adapters/security/hashService';
 
 // Domínio
 import { TransactionBalanceCalculator } from '../domain/services/TransactionBalanceCalculator';
+
 // Casos de uso - Usuário
 import { LoginUserUseCase } from '../application/usecases/user/LoginUserCase';
 import { RegisterUserUseCase } from '../application/usecases/user/RegistarUsuarioUseCase';
+
 // Casos de uso - Transações
 import { CreateTransactionUseCase } from '../application/usecases/transaction/CreateTransactionUseCase';
 import { GetBalanceUseCase } from '../application/usecases/transaction/GetBalanceUseCase';
@@ -22,8 +27,8 @@ import { UserController } from '../interfaces/web/controllers/UserController';
 import { TransactionController } from '../interfaces/web/controllers/TransactionController';
 
 // Repositórios
-const userRepository = new InMemoryUserRepository();
-const transactionRepository = new InMemoryTransactionRepository();
+const userRepository = PrismaUserRepository.create(prisma);//new InMemoryUserRepository();
+const transactionRepository = TransactionPrismaRepository.create(prisma);//new InMemoryTransactionRepository();
 
 // Serviços
 const hashingAdapter = new HashingAdapter(env.SALT_ROUNDS);
