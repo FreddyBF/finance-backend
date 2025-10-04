@@ -9,7 +9,6 @@ export class GetBalanceUseCase {
     ) {}
 
     async execute(userId: number): Promise<GetBalanceOutputDTO> {
-        console.log(`Use case- ${userId}`);
         const transactionList = await this.transactionRepository.getAll(userId);
         const balance = this.transactionBalanceCalculator.execute(transactionList);
         return {
