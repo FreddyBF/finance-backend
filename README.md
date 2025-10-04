@@ -68,7 +68,7 @@ yarn cli
 | PUT    | `/transactions/:id` | Actualizar transação              |
 | DELETE | `/transactions/:id` | Excluir transação                |
 | GET    | `/transactions?limit=10&skip=0`     | Listar transações com filtros    |
-| GET    | `transactions/balance`          | Exibir saldo total                  |
+| GET    | `transactions/amount`          | Exibir saldo total                  |
 
 ⚠️ Todas as rotas de transações exigem autenticação via **token JWT**.
 
@@ -114,4 +114,11 @@ O sistema foi pensado para operar com **dois bancos de dados distintos**, mas **
 
 ---
 
+## 📌 Decisões técnicas
 
+- Prisma escolhido pela tipagem forte e integração com TypeScript
+- JWT com algoritmo HS256 para performance
+- Arquitetura hexagonal para facilitar testes e troca de tecnologias
+- Separação de responsabilidades para escalabilidade e manutenção
+
+---

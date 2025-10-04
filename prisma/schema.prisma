@@ -23,7 +23,7 @@ model User {
 
 model Transaction {
   id      Int     @id @default(autoincrement())
-  balance Float
+  amount Float
   type    String
   date    DateTime
   userId  Int

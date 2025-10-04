@@ -156,7 +156,7 @@ paths:
         '404':
           description: Transação não encontrada
 
-  /transactions/balance:
+  /transactions/amount:
     get:
       tags: [Transações]
       summary: Consultar saldo atual do usuário
@@ -200,9 +200,9 @@ components:
 
     TransactionInput:
       type: object
-      required: [balance, type, date]
+      required: [amount, type, date]
       properties:
-        balance:
+        amount:
           type: number
           format: float
         type:

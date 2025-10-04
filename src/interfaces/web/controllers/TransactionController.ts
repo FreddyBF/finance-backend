@@ -4,9 +4,9 @@ import { DeleteTransactionUseCase } from '../../../application/usecases/transact
 import { GetTransactionsUseCase } from '../../../application/usecases/transaction/GetTransactionUseCase';
 import { UpdateTransactionUseCase } from '../../../application/usecases/transaction/UpdateTransactionUseCase';
 import { AuthenticatedRequest } from '../../../types/express';
-import { GetBalanceOutputDTO } from '../../../application/dtos/transaction/GetBalanceOutputDto';
+import { GetAmountOutputDTO } from '../../../application/dtos/transaction/GetAmountOutputDto';
 import { ListTransactionInputDTO } from '../../../application/dtos/transaction/ListTransactionInputDto';
-import { GetBalanceUseCase } from '../../../application/usecases/transaction/GetBalanceUseCase';
+import { GetAmountUseCase } from '../../../application/usecases/transaction/GetAmountUseCase';
 import { ApiResponse } from '../helper/apiResponse';
 import { TransactionOutputDTO } from '../../../application/dtos/transaction/TransactionOutputDto';
 import { CreateTransactionDto } from '../../../application/dtos/transaction/CreateTransactionDto';
@@ -14,22 +14,22 @@ import { UpdateTransactionDTO } from '../../../application/dtos/transaction/Upda
 
 export class TransactionController {
     constructor(
-        private readonly getBalanceUseCase: GetBalanceUseCase,
+        private readonly GetAmountUseCase: GetAmountUseCase,
         private readonly createTransactionUseCase: CreateTransactionUseCase,
         private readonly deleteTransactionUseCase: DeleteTransactionUseCase,
         private readonly listTransactionsUseCase: GetTransactionsUseCase,
         private readonly updateTransactionUseCase: UpdateTransactionUseCase
     ) {}
 
-    public getBalance = async (
+    public getAmount = async (
         req: AuthenticatedRequest,
         res: Response,
         next: NextFunction
     ): Promise<void> => {
         try {
-            const balance = await this.getBalanceUseCase.execute(req.userId);
+            const amount = await this.GetAmountUseCase.execute(req.userId);
             res.status(200).json(
-                ApiResponse.ok<GetBalanceOutputDTO>(balance, 'Saldo consultado com sucesso')
+                ApiResponse.ok<GetAmountOutputDTO>(amount, 'Saldo consultado com sucesso')
             );
         } catch (error) {
             next(error);
@@ -80,13 +80,13 @@ export class TransactionController {
         next: NextFunction
     ): Promise<void> => {
         try {
-            const { balance, date, type } = req.body;
+            const { amount, date, type } = req.body;
 
             const dto: CreateTransactionDto = {
                 userId: req.userId,
                 date: new Date(date),
                 type: type,
-                balance: balance,
+                amount: amount,
             };
 
             const transaction = await this.createTransactionUseCase.execute(dto);
@@ -120,14 +120,14 @@ export class TransactionController {
     ): Promise<void> => {
         try {
             const { id } = req.params;
-            const { balance, type, date } = req.body;
+            const { amount, type, date } = req.body;
 
             const dto: UpdateTransactionDTO = {
                 userId: req.userId,
                 id: Number(id),
                 date: date ? new Date(date) : undefined,
                 transactionType: type,
-                balance: balance 
+                amount: amount 
             };
             const updated = await this.updateTransactionUseCase.execute(dto);
 

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const createtransactionBodySchema = z.object({
-    balance: z.number().positive('O balance deve ser um valor posetivo'),
+    amount: z.number().positive('O amount deve ser um valor posetivo'),
 
     type: z.enum(['RECEITA', 'DESPESA']).refine((val) => val === 'RECEITA' || val === 'DESPESA', {
         message: 'O type de transaction deve ser "RECEITA" ou "DESPESA"',

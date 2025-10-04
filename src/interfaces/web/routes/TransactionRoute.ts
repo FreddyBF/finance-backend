@@ -15,7 +15,7 @@ transactionRouter.get(
     transactionController.getTransactions
 );
 
-transactionRouter.get('/balance', transactionController.getBalance);
+transactionRouter.get('/balance', transactionController.getAmount);
 
 transactionRouter.post(
     '/',

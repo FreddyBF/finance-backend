@@ -1,31 +1,31 @@
 import { TransactionType } from './TransactionType';
-import { Balance } from './Balance';
+import { Amount } from './Amount';
 
 export class Transaction {
     private readonly _id: number | null;
     private readonly _userId: number;
     private readonly _date: Date;
     private readonly _type: TransactionType;
-    private readonly _balance: Balance;
+    private readonly _amount: Amount;
 
     private constructor(
         id: number | null,
         userId: number,
         date: Date,
         type: TransactionType,
-        balance: Balance
+        amount: Amount
     ) {
         this._id = id;
         this._userId = userId;
         this._date = date;
         this._type = type;
-        this._balance = balance;
+        this._amount = amount;
     }
 
     public static create(userId: number, date: Date, tipo: string, valor: number): Transaction {
         const type = new TransactionType(tipo);
-        const balance = new Balance(valor);
-        return new Transaction(null, userId, date, type, balance);
+        const amount = new Amount(valor);
+        return new Transaction(null, userId, date, type, amount);
     }
 
     public static restore(
@@ -36,8 +36,8 @@ export class Transaction {
         valor: number
     ): Transaction {
         const type = new TransactionType(tipo);
-        const balance = new Balance(valor);
-        return new Transaction(id, userId, date, type, balance);
+        const amount = new Amount(valor);
+        return new Transaction(id, userId, date, type, amount);
     }
 
     public get id(): number | null {
@@ -56,8 +56,8 @@ export class Transaction {
         return this._type.getValue();
     }
 
-    public get balance(): number {
-        return this._balance.apply(this._type);
+    public get amount(): number {
+        return this._amount.apply(this._type);
     }
 
     public isExpense(): boolean {

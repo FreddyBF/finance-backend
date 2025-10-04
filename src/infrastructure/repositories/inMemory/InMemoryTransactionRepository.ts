@@ -11,7 +11,7 @@ export class InMemoryTransactionRepository implements TransactionRepositoryPort 
             transaction.userId,
             transaction.date,
             transaction.type,
-            Math.abs(transaction.balance)
+            Math.abs(transaction.amount)
         );
         this.transactions.push(restored);
         return restored;

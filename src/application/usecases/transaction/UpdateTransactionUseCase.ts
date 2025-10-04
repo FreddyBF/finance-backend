@@ -21,7 +21,7 @@ export class UpdateTransactionUseCase {
             dto.userId,
             dto.date ?? existingTransaction.date,
             dto.transactionType ?? existingTransaction.type,
-            dto.balance ?? Math.abs(existingTransaction.balance) // balance is normalized; entity applies sign based on type
+            dto.amount ?? Math.abs(existingTransaction.amount) // amount is normalized; entity applies sign based on type
         );
         const savedTransaction = await this.transactionRepository.update(updatedTransaction);
         return TransactionMapper.entityToDto(savedTransaction);

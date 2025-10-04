@@ -7,7 +7,7 @@ const exceptionStatusMap = new Map<string, number>([
     ['InvalidPasswordException', 401],
     ['UnauthorizedException', 403],
     ['UserNotFoundException', 404],
-    ['InvalidBalanceException', 400],
+    ['InvalidamountException', 400],
     ['InvalidTransactionTypeException', 400],
     ['InvalidEmailException', 400],
     ['InvalidUpdateTranscationException', 400],

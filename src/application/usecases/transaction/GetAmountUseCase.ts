@@ -1,19 +1,19 @@
 import { TransactionRepositoryPort } from '../../ports/TransactionRepositoryPort';
 import { TransactionBalanceCalculator } from '../../../domain/services/TransactionBalanceCalculator';
-import { GetBalanceOutputDTO } from '../../dtos/transaction/GetBalanceOutputDto';
+import { GetAmountOutputDTO } from '../../dtos/transaction/GetAmountOutputDto';
 
-export class GetBalanceUseCase {
+export class GetAmountUseCase {
     constructor(
-        private readonly transactionBalanceCalculator: TransactionBalanceCalculator,
+        private readonly transactionamountCalculator: TransactionBalanceCalculator ,
         private readonly transactionRepository: TransactionRepositoryPort
     ) {}
 
-    async execute(userId: number): Promise<GetBalanceOutputDTO> {
+    async execute(userId: number): Promise<GetAmountOutputDTO> {
         const transactionList = await this.transactionRepository.getAll(userId);
-        const balance = this.transactionBalanceCalculator.execute(transactionList);
+        const amount = this.transactionamountCalculator.execute(transactionList);
         return {
             date: new Date(),
-            balance: balance,
+            amount: amount,
         };
     }
 }

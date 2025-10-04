@@ -17,7 +17,7 @@ import { RegisterUserUseCase } from '../application/usecases/user/RegistarUsuari
 
 // Casos de uso - Transações
 import { CreateTransactionUseCase } from '../application/usecases/transaction/CreateTransactionUseCase';
-import { GetBalanceUseCase } from '../application/usecases/transaction/GetBalanceUseCase';
+import { GetAmountUseCase } from '../application/usecases/transaction/GetAmountUseCase';
 import { GetTransactionsUseCase } from '../application/usecases/transaction/GetTransactionUseCase';
 import { DeleteTransactionUseCase } from '../application/usecases/transaction/DeleteTransactionUseCase';
 import { UpdateTransactionUseCase } from '../application/usecases/transaction/UpdateTransactionUseCase';
@@ -33,7 +33,7 @@ const transactionRepository = TransactionPrismaRepository.create(prisma);//new I
 // Serviços
 const hashingAdapter = new HashingAdapter(env.SALT_ROUNDS);
 const jwtService = new JwtTokenAdapter(env.ACCESS_SECRET, env.JWT_EXPIRATION);
-const transactionBalanceCalculator = new TransactionBalanceCalculator();
+const transactionamountCalculator = new TransactionBalanceCalculator();
 
 // Casos de uso - Usuário
 const loginUserUseCase = new LoginUserUseCase(userRepository, hashingAdapter, jwtService);
@@ -42,8 +42,8 @@ const registerUserUseCase = new RegisterUserUseCase(userRepository, hashingAdapt
 // Casos de uso - Transações
 const createTransactionUseCase = new CreateTransactionUseCase(transactionRepository);
 const getTransactionUseCase = new GetTransactionsUseCase(transactionRepository);
-const consultarSaldoUseCase = new GetBalanceUseCase(
-    transactionBalanceCalculator,
+const consultarSaldoUseCase = new GetAmountUseCase(
+    transactionamountCalculator,
     transactionRepository
 );
 const updateTransactionUseCase = new UpdateTransactionUseCase(transactionRepository);

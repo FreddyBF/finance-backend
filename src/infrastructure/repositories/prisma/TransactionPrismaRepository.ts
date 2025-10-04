@@ -4,7 +4,7 @@ import { Transaction } from '../../../domain/entities/transaction/Transaction';
 
 export class TransactionPrismaRepository implements TransactionRepositoryPort {
     private constructor(private readonly prisma: PrismaClient) {}
-    
+
     public static create(prisma: PrismaClient): TransactionPrismaRepository {
         return new TransactionPrismaRepository(prisma);
     }
@@ -13,26 +13,26 @@ export class TransactionPrismaRepository implements TransactionRepositoryPort {
         const tx = await this.prisma.transaction.create({
             data: {
                 userId: transaction.userId,
-                balance: Math.abs(transaction.balance),
+                amount: Math.abs(transaction.amount),
                 type: transaction.type,
                 date: transaction.date,
             },
         });
 
-        return Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.balance);
+        return Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.amount);
     }
 
     public async update(transaction: Transaction): Promise<Transaction | null> {
         const tx = await this.prisma.transaction.update({
             where: { id: transaction.id },
             data: {
-                balance: transaction.balance,
+                amount: transaction.amount,
                 type: transaction.type,
                 date: transaction.date,
             },
         });
 
-        return Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.balance);
+        return Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.amount);
     }
 
     public async delete(id: number, userId: number): Promise<void> {
@@ -60,7 +60,7 @@ export class TransactionPrismaRepository implements TransactionRepositoryPort {
             skip,
         });
 
-        return txs.map((tx) => Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.balance));
+        return txs.map((tx) => Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.amount));
     }
 
     public async findById(id: number, userId: number): Promise<Transaction | null> {
@@ -68,7 +68,7 @@ export class TransactionPrismaRepository implements TransactionRepositoryPort {
             where: { id, userId },
         });
 
-        return tx ? Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.balance) : null;
+        return tx ? Transaction.restore(tx.id, tx.userId, tx.date, tx.type, tx.amount) : null;
     }
 
     public async count(): Promise<number> {

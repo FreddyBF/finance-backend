@@ -5,12 +5,12 @@ export interface UpdateTransactionDTO {
     id: number;
     date?: Date;
     transactionType?: string;
-    balance?: number;
+    amount?: number;
 }
 
 export function validateUpdate(dto: UpdateTransactionDTO) {
-    const { date, transactionType, balance } = dto;
-    if (date === undefined && transactionType === undefined && balance === undefined) {
+    const { date, transactionType, amount } = dto;
+    if (date === undefined && transactionType === undefined && amount === undefined) {
         throw new InvalidUpdateTranscationException();
     }
 }

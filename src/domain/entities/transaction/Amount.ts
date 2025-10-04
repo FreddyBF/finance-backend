@@ -1,12 +1,12 @@
 import { TransactionType } from './TransactionType';
-import { InvalidBalanceException } from '../../exceptions/InvalidBalanceException';
+import { InvalidAmountException } from '../../exceptions/InvalidAmountException';
 
-class Balance {
+class Amount {
     private readonly _value: number;
 
     constructor(value: number) {
         if (value <= 0) {
-            throw new InvalidBalanceException(value);
+            throw new InvalidAmountException(value);
         }
         this._value = value;
     }
@@ -20,4 +20,4 @@ class Balance {
     }
 }
 
-export { Balance };
+export { Amount };

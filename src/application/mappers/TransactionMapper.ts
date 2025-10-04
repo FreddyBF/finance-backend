@@ -7,7 +7,7 @@ export class TransactionMapper {
         return {
             id: transaction.id,
             typeTransaction: transaction.type?.toLowerCase() ?? 'desconhecido',
-            balance: transaction.balance,
+            amount: transaction.amount,
             date: transaction.date,
         };
     }

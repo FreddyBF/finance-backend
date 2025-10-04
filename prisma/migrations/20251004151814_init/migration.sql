@@ -11,7 +11,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Transaction" (
     "id" SERIAL NOT NULL,
-    "balance" DOUBLE PRECISION NOT NULL,
+    "amount" DOUBLE PRECISION NOT NULL,
     "type" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
