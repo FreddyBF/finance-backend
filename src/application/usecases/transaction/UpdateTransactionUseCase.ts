@@ -17,13 +17,12 @@ export class UpdateTransactionUseCase {
         }
 
         const updatedTransaction = Transaction.restore(
-            dto.userId,
             dto.id,
+            dto.userId,
             dto.date ?? existingTransaction.date,
             dto.transactionType ?? existingTransaction.type,
             dto.balance ?? Math.abs(existingTransaction.balance) // balance is normalized; entity applies sign based on type
         );
-
         const savedTransaction = await this.transactionRepository.update(updatedTransaction);
         return TransactionMapper.entityToDto(savedTransaction);
     }

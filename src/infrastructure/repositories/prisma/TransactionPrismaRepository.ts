@@ -4,7 +4,7 @@ import { Transaction } from '../../../domain/entities/transaction/Transaction';
 
 export class TransactionPrismaRepository implements TransactionRepositoryPort {
     private constructor(private readonly prisma: PrismaClient) {}
-
+    
     public static create(prisma: PrismaClient): TransactionPrismaRepository {
         return new TransactionPrismaRepository(prisma);
     }

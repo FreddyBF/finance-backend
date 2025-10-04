@@ -125,15 +125,14 @@ export class TransactionController {
             const dto: UpdateTransactionDTO = {
                 userId: req.userId,
                 id: Number(id),
-                date: new Date(date),
+                date: date ? new Date(date) : undefined,
                 transactionType: type,
-                balance: balance,
+                balance: balance 
             };
-
             const updated = await this.updateTransactionUseCase.execute(dto);
 
             res.status(200).json(
-                ApiResponse.ok<TransactionOutputDTO>(updated, 'Transação atualizada com sucesso')
+                ApiResponse.ok<TransactionOutputDTO>(updated, 'Transação actualizada com sucesso')
             );
         } catch (error) {
             next(error);
