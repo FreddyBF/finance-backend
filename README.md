@@ -2,14 +2,14 @@
 
 ![Logo Kinvo](https://github.com/cbfranca/kinvo-front-end-test/blob/master/logo.svg)
 
-API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo. O objetivo é gerenciar movimentações financeiras (receitas e despesas), autenticar usuários e exibir o saldo, utilizando boas práticas de arquitetura limpa e código escalável.
+API REST desenvolvida em Node.js com TypeScript para o desafio back-end da Kinvo. O objetivo é gerenciar transações financeiras (receitas e despesas), autenticar utilizadores e exibir o saldo, utilizando boas práticas de arquitetura limpa e código escalável.
 
 ---
 ## 📚 Funcionalidades
 
-- ✅ Cadastro e login de usuários
-- ✅ Criação de movimentações (receitas e despesas)
-- ✅ Atualização e exclusão de movimentações
+- ✅ Cadastro e login de utilizadores
+- ✅ Criação de transações (receitas e despesas)
+- ✅ Actualização e exclusão de transações
 - ✅ Listagem com filtros por data e paginação
 - ✅ Exibição do saldo total
 
@@ -49,8 +49,12 @@ JWT_SECRET="sua_chave_secreta"
 # Execute as migrations
 npx prisma migrate dev
 
-# Inicie o servidor
+# Inicie o servidor para acesso via web/API
 yarn dev
+
+# Ou use a interface de linha de comando (CLI)
+yarn cli
+
 ```
 ---
 
@@ -58,15 +62,15 @@ yarn dev
 
 | Método | Rota                | Descrição                           |
 |--------|---------------------|-------------------------------------|
-| POST   | `/auth/register`    | Cadastro de usuário                 |
+| POST   | `/auth/register`    | Cadastro de utilizador                 |
 | POST   | `/auth/login`       | Login e geração de token JWT        |
-| POST   | `/transactions`     | Criar movimentação                  |
-| PUT    | `/transactions/:id` | Atualizar movimentação              |
-| DELETE | `/transactions/:id` | Excluir movimentação                |
-| GET    | `/transactions?limit=valor&skip=valor`     | Listar movimentações com filtros    |
-| GET    | `transactions/saldo`          | Exibir saldo total                  |
+| POST   | `/transactions`     | Criar transação                  |
+| PUT    | `/transactions/:id` | Actualizar transação              |
+| DELETE | `/transactions/:id` | Excluir transação                |
+| GET    | `/transactions?limit=10&skip=0`     | Listar transações com filtros    |
+| GET    | `transactions/balance`          | Exibir saldo total                  |
 
-⚠️ Todas as rotas de movimentações exigem autenticação via **token JWT**.
+⚠️ Todas as rotas de transações exigem autenticação via **token JWT**.
 
 ---
 
@@ -78,5 +82,36 @@ yarn dev
 ---
 
 ## 🧠 Sobre o desafio
+
 Este projeto foi desenvolvido como parte do **Desafio Back-end da Kinvo**.  
-O foco está em aplicar **boas práticas de desenvolvimento**, **arquitetura limpa** e **organização de código**.
+O foco está em aplicar **boas práticas de desenvolvimento**, **arquitetura limpa (hexagonal)** e **organização de código**.
+
+---
+
+## 🗄️ Duplo suporte a banco de dados
+
+O sistema foi pensado para operar com **dois bancos de dados distintos**, mas **apenas um deles será usado por vez**:
+
+- 🔹 **Banco em memória:**  
+  - Usado principalmente para testes e desenvolvimento local.  
+  - Facilita a agilidade sem dependências externas.
+
+- 🔹 **PostgreSQL:**  
+  - Banco relacional utilizado para ambientes de produção.   
+  - Prisma proporciona uma camada robusta, com tipagem, consultas complexas e migrações controladas.
+
+---
+
+## 🏗️ Arquitectura limpa (Hexagonal)
+
+- O sistema segue o princípio da **arquitetura limpa (ou hexagonal)**, que separa claramente:  
+  - **Domínio/negócio** (regras e lógica),  
+  - **Portas** (interfaces abstratas),  
+  - **Adaptadores** (implementações concretas, como bancos de dados).
+
+- Graças a essa abordagem, a escolha do banco de dados é **abstrata e intercambiável**.  
+- Isso permite alternar entre o banco em memória e o PostgreSQL sem impactar a lógica central do sistema.
+
+---
+
+
